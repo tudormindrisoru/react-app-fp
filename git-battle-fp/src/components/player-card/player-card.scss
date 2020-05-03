@@ -1,0 +1,179 @@
+@import '../../pages/main-page/main.scss';
+
+.card-battle {
+    align-self:center;
+}
+.player-blank-card {
+    height: auto;
+    width: 15rem;
+    background: #fff;
+    align-self: center;
+    margin: 2rem;
+    display:flex;
+    flex-direction: column;
+    border: 0.05rem $default-color solid;
+    box-shadow: $box-shadow;
+    background: #a7a7a781;
+}
+
+.select-player-title {
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.card-input {
+    margin: 2rem;
+    transition: 0.1s;
+    outline: none;
+}
+
+.submit-search-button {
+    border: 0.1rem $default-color solid;
+    width: 6rem;
+    height: 1.5rem;
+    align-self: center;
+    background-color: #fff;
+    color: $default-color;
+    font-weight: bold;
+    transition: 0.5s;
+    margin-bottom: 2rem;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $default-color ;
+        color: #fff;
+    }
+}
+
+.player-error-card {
+    height: auto;
+    width: 15rem;
+    background: #fff;
+    align-self: center;
+    margin: 2rem;
+    display:flex;
+    flex-direction: column;
+    border: 0.05rem $danger-color-500 solid;
+    box-shadow: $box-shadow;
+    background: $danger-color-400;
+}
+
+.error-title {
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.retry-button {
+    border: 0.05rem  #fff  solid;
+    width: 6rem;
+    height: 1.5rem;
+    margin-top: 2rem;
+    align-self: center;
+    background-color: transparent;
+    color: $default-color;
+    font-weight: bold;
+    transition: 0.5s;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+    color: $danger-color-500;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+        border: 0.05rem  #fff solid; 
+        background-color: #fff;
+        color: $danger-color-400;
+    }
+}
+
+.player-chosen-card {
+    height: 100%;
+    width: 15rem;
+    background: #fff;
+    align-self: center;
+    margin: 2rem;
+    display:flex;
+    flex-direction: column;
+    border: .05rem $primary-color solid;
+    box-shadow: $box-shadow;
+    background: #24292e04;
+} 
+
+.image-wrap {
+    width: 100%;
+    height: auto;
+    position: relative;
+    transition: .5s;
+    box-shadow: $box-shadow;
+    .image-description {
+        position: absolute;
+        font-weight: 500;
+        font-size: x-large;
+        color: $primary-color;
+        top: 5.5rem;
+        left: 3.5rem;
+        visibility: hidden; 
+    }
+    &:hover .image-description {
+        visibility: visible;
+    }
+}
+
+.profile-image {
+    width: 100%;
+    height: auto;
+    
+    &:hover{
+        opacity: 0.4;
+    }
+}
+
+.player-info {
+    width: 100%;
+    min-height: 8rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.info-container {
+    display:flex;
+    flex-direction: row;
+    margin: 1rem;
+
+    span {
+        color: $secondary-color;
+    }
+}
+
+.card-icons {
+    margin-right: .5rem;
+    align-self: center;
+}
+
+.clear-button {
+    border: 0.05rem  $primary-color  solid;
+    width: 6rem;
+    height: 1.5rem;
+    align-self: center;
+    background-color: transparent;
+    color: $secondary-color;
+    font-weight: bold;
+    transition: 0.5s;
+    margin-bottom: 2rem;
+    color: $secondary-color;
+    color: $primary-color;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+        border: 0.05rem  #fff solid; 
+        background-color: $secondary-color;
+        color: #fff;
+    }
+}

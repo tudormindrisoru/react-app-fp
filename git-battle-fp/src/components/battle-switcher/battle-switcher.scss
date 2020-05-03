@@ -1,0 +1,56 @@
+@import '../../pages/main-page/main.scss';
+
+
+.switcher-container {
+    width: 100%;
+    height: auto;
+}
+.battle-switcher {
+    width: 20rem;
+    height: 2rem;
+    background: #fff;
+    box-shadow: $box-shadow;
+    align-self: center;
+    margin: 2rem auto;
+    border-radius: 1rem;
+    display: flex;
+}
+
+.player-vs-player-button {
+    flex: 1;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+
+.divider {
+    width: 0.05rem;
+    background:rgb(233, 233, 233);
+    height: 100%;
+}
+
+.me-vs-player-button{
+    flex: 1;
+    border-bottom-right-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.player-vs-player-button, .me-vs-player-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    cursor: pointer;
+}
+
+.active-button {
+    background: $secondary-color;
+    .switcher-text {
+        color: #fff;
+    }
+}
+
+.switcher-text {
+    text-align: center;
+    color: $secondary-color;
+    font-weight: 400;
+}

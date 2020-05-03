@@ -1,0 +1,49 @@
+@import '../../pages/main-page/main.scss';
+
+.button-container {
+  width: 100%;
+  height: auto;
+  // background: yellow;
+  display:flex;
+  justify-content: center;
+}
+
+.fight-button {
+  width: 15rem;
+  height: 5rem;
+  outline: none;
+  background: #fff;
+  border: .05rem $secondary-color solid;
+  background: transparent;
+  align-items: center;
+  display:flex;
+  margin-top: 10rem;
+  cursor: pointer;
+
+  #fight-image{
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  p {
+    font-weight: bold;
+    color: $secondary-color;
+    font-size: 2rem;
+    margin: 0 auto;
+  }
+
+  &:hover {
+    background: $secondary-color;
+
+    p {
+      color: #fff;
+    }
+  }
+
+
+  // @media only screen and (min-width: 1000px) {
+  //   .fight-button {
+  //     margin-top: 2rem;
+  //   }
+  // }
+}
