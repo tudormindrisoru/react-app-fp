@@ -17,35 +17,48 @@ class FightButton extends React.Component {
     this.onRelease = this.onRelease.bind(this);
   }
 
-  onHover = () => {
+  onHover = (e) => {
+    e.stopPropagation();
+    document.querySelector(".fight-button span").style.color = "#fff";
+    document.querySelector('.fight-button').style.backgroundColor = "#2d3946";
     this.setState({
       image: HoverFightImage
     });
   }
 
   onRelease = () => {
+    document.querySelector(".fight-button span").style.color = "#2d3946";
+    document.querySelector('.fight-button').style.backgroundColor = "transparent";
     this.setState({
       image: FightImage
     });
   }
 
+
   render() {
-    return(
-      <div className="button-container">
-        <button 
-          className="fight-button"
-          onMouseEnter = {this.onHover}
-          onMouseOut = {this.onRelease}>
-          <img 
-            id = "fight-icon" 
-            alt = "" 
-            src = {this.state.image}
-            style = {{width: 60, height:60}} 
-          />
-          <p>FIGHT</p>
-        </button>
-      </div>
-    );
+    if(this.props.type === 'active') {
+      return(
+        <div className="button-container">
+          <button 
+            className="fight-button"
+            onMouseEnter = {this.onHover}
+            onMouseOut = {this.onRelease}>
+            <img 
+              id = "fight-icon" 
+              alt = "" 
+              src = {this.state.image}
+              style = {{width: 60, height:60}}
+            />
+            <span
+            >FIGHT</span>
+          </button>
+        </div>
+      );
+    }
+    else {
+      return (<div></div>);
+    }
+
   }
 }
 

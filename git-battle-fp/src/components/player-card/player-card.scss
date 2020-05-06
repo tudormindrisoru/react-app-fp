@@ -6,26 +6,39 @@
 .player-blank-card {
     height: auto;
     width: 15rem;
-    background: #fff;
     align-self: center;
     margin: 2rem;
     display:flex;
     flex-direction: column;
     border: 0.05rem $default-color solid;
     box-shadow: $box-shadow;
-    background: #a7a7a781;
+    background: #a7a7a73a;
 }
 
 .select-player-title {
-    color: #fff;
+    color: $secondary-color;
     font-weight: 500;
     font-size: 1.5rem;
 }
 
+.input-container-blank-card {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    // justify-content: unset;
+}
+
 .card-input {
     margin: 2rem;
+    font-size: 1.15rem;
+    color: $secondary-color;
     transition: 0.1s;
     outline: none;
+    background: transparent;
+    border: 0.05rem $default-color solid;
+    width: auto;
+    height: 1.5rem;
 }
 
 .submit-search-button {
@@ -33,10 +46,10 @@
     width: 6rem;
     height: 1.5rem;
     align-self: center;
-    background-color: #fff;
+    background-color: transparent;
     color: $default-color;
     font-weight: bold;
-    transition: 0.5s;
+
     margin-bottom: 2rem;
     outline: none;
     cursor: pointer;
@@ -110,6 +123,7 @@
     position: relative;
     transition: .5s;
     box-shadow: $box-shadow;
+    z-index: 2;
     .image-description {
         position: absolute;
         font-weight: 500;
@@ -118,19 +132,23 @@
         top: 5.5rem;
         left: 3.5rem;
         visibility: hidden; 
+
     }
-    &:hover .image-description {
-        visibility: visible;
+    &:hover {
+        .image-description {
+            visibility: visible;
+        }
+        .profile-image {
+            opacity: 0.4;
+        }
+
     }
+
 }
 
 .profile-image {
     width: 100%;
     height: auto;
-    
-    &:hover{
-        opacity: 0.4;
-    }
 }
 
 .player-info {

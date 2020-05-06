@@ -9,6 +9,7 @@
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
+    z-index: 3;
 }
 
 .extended-sidenav {
@@ -79,6 +80,11 @@
     &:hover {
         background: #24292e;
     }
+
+    .login-image {
+        width: 2.5rem;
+        height: auto;
+    }
 }
 
 .active-item {
@@ -106,7 +112,21 @@
 
 .logo-container {
     color: #fff;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    #logo {
+        width: 3rem;
+        height: auto;
+    }
 }
+
+#login-container {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
 
 .font-icon {
     align-self: center;

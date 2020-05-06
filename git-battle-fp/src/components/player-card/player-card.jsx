@@ -28,23 +28,21 @@ class PlayerCard extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       cardState: "blank",
-      username: "",
+      username:  "",
       avatar: "",
       urlLink: "",
       type: "",
     }
 
     this.renderCard = this.renderCard.bind(this);
-    this.search = this.search.bind(this);
     this.getUser = this.getUser.bind(this);
     this.openProfile = this.openProfile.bind(this);
     this.clear = this.clear.bind(this);
   }
 
-  
+
   getUser = async () => {
     const username = document.querySelector('.card-input').value;
       const data = await fetchUserData(username);
@@ -64,19 +62,16 @@ class PlayerCard extends React.Component {
           urlLink: data["html_url"],
           type: data["type"],
         });
-      }
-  }
 
-  search = () => {
-    if(document.querySelector('.card-input').value !== "") {
-      this.setState({
-        cardState: "chosen",
-        username: this.state.username,
-        avatar: this.state.avatar,
-        urlLink: this.state.urlLink,
-        type: this.state.type,
-      });
-    }
+        this.props.getPlayer({
+          username: data["login"],
+          type: data["type"],
+          avatar: data["avatar_url"],
+          urlLink: data["html_url"],
+          following: data['following'],
+          followers: data['followers']
+        });
+      }
   }
 
   openProfile = () => {
@@ -100,16 +95,21 @@ class PlayerCard extends React.Component {
       avatar: "",
       urlLink: "",
       type: "",
-    })
+    });
+
+    this.props.clearPlayer();
   }
  
   renderCard = () => {
     if(this.state.cardState === "blank") {
       return(
         <div className="player-blank-card">
-            <p className="select-player-title">Select username</p>
-            <input type="text" className="card-input" />
-            <button className="submit-search-button" onClick= {this.getUser} >Search</button>
+          <p className="select-player-title">Select player</p>
+          <div className="input-container-blank-card">
+            <label htmlFor="user-input">Username</label>
+            <input type="text" className="card-input" name="user-input"/>
+          </div>
+          <button className="submit-search-button" onClick= {this.getUser} >Search</button>
         </div>
       );
     } else if(this.state.cardState === "chosen") {

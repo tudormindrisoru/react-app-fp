@@ -1,0 +1,42 @@
+@import '../../pages/main-page/main.scss';
+
+.input-field {
+  position: relative;
+  width: 250px;
+  height: 44px;
+  line-height: 44px;
+  display: inline-block;
+}
+label {
+  position: absolute;
+  text-align: start;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #d3d3d3;
+  transition: 0.2s all;
+  cursor: text;
+}
+input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #d3d3d3;
+  box-shadow: none;
+  color: $secondary-color;
+}
+input:invalid {
+  outline: 0;
+
+}
+input:focus,
+input:valid {
+  border-color: $secondary-color;
+}
+input:focus~label,
+input:valid~label {
+  font-size: 14px;
+  top: -24px;
+  color: $secondary-color;
+}

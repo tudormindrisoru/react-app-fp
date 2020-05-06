@@ -1,6 +1,9 @@
 
 import React from 'react'
 import './sidenav.scss';
+import LogoImage from '../../assets/logo-v1.png';
+import LoginImage from '../../assets/git-login.png';
+import  GitLogin from '../gitLogin/githubLogin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faHistory, 
@@ -21,6 +24,7 @@ class Sidenav extends React.Component {
       extended: false
     }
     this.extend = this.extend.bind(this);
+    this.changeActivePage = this.changeActivePage.bind(this);
   }
 
 
@@ -43,21 +47,29 @@ class Sidenav extends React.Component {
       }
     }
     this.setState({
-      extended: !this.state.extended
+      extended: !this.state.extended,
+      activePage: "main"
     });
   }
 
+  changeActivePage = (e) => {
+    console.log(e.target.classList);
+  }
+
     render() {
-      return <div className="sidenav-container">
+      return (<div className="sidenav-container">
         <div className="sidenav-navigation">
           <div className="top-navigation">
             <div className="logo-container">
-              <h4>Logo</h4>
+              <img src={LogoImage} alt="" id="logo"/>
             </div>
-            <div className="navigation-item">
-            <FontAwesomeIcon icon={faSignInAlt} size="2x" className="font-icon" color="#fff"/>
-              <span className="navigation-labels label-hidden">Login</span>
-            </div>
+            {/* <Link to="/auth" style={{ textDecoration: 'none', marginBottom: '0.5rem', marginTop: '1rem' }}> */}
+              <div className="navigation-item" id="login-container">
+                <img src={LoginImage} alt="" className="login-image"/>
+              {/* <FontAwesomeIcon icon={faSignInAlt} size="2x" className="font-icon" color="#fff"/> */}
+                <span className="navigation-labels label-hidden">Git login</span>
+              </div>
+            {/* </Link> */}
             <div className="diamonds-container">
               <FontAwesomeIcon icon={faGem} size="sm" className="font-icon" color="#fff"/>
               <span id="number-of-diamonds">10</span>
@@ -66,19 +78,19 @@ class Sidenav extends React.Component {
           </div>
           <div className="bottom-navigation">
           <Link to="/history" style={{ textDecoration: 'none' }}>
-            <div className="navigation-item">
+            <div className="navigation-item" onClick={ e => this.changeActivePage(e)}>
               <FontAwesomeIcon icon={faHistory} size="2x" className="font-icon" color="#fff"/>
               <span className="navigation-labels label-hidden">History</span>
             </div>
           </Link>
           <Link to="/battle" style={{ textDecoration: 'none' }}>
-            <div className="navigation-item">
+            <div className="navigation-item" onClick={ e => this.changeActivePage(e)}>
             <FontAwesomeIcon icon={faUserNinja} size="2x" className="font-icon" color="#fff"/>
               <span className="navigation-labels label-hidden">Battle</span>
             </div>
           </Link>
           <Link to="/statistics" style={{ textDecoration: 'none' }}>
-            <div className="navigation-item">
+            <div className="navigation-item" onClick={ e => this.changeActivePage(e)}>
             <FontAwesomeIcon icon={faChartBar} size="2x" className="font-icon" color="#fff"/>
               <span className="navigation-labels label-hidden">Statistics</span>
             </div>
@@ -88,7 +100,7 @@ class Sidenav extends React.Component {
             </div>
         </div>
         </div>
-      </div>
+      </div>)
     }
 }
 
