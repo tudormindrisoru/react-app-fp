@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as firebase from 'firebase';
 import { useDispatch, useSelector } from 'react-redux'; 
 import axios from 'axios';
-import { addUser, login } from '../../actions/user';
+import { addUser, login, logout } from '../../actions/user';
 import {
   BrowserRouter as Router,
   Switch,
@@ -86,7 +86,6 @@ export default function Main() {
 }
 
 const getDataFromFirebase = (gitData) => {
-  // if(!user.isLogged) {
     var userId = gitData.username;
     firebase.database().ref('users/'+ userId).once('value').then(function(snapshot) {
     const firebaseData = snapshot.val();
@@ -99,14 +98,22 @@ const getDataFromFirebase = (gitData) => {
   }
     dispatch(login({history: firebaseData.history == null ? null : firebaseData.history , diamonds: firebaseData.diamonds}));
     });
+}
 
-  // }
+const doSignOut = () => {
+  firebase.auth().signOut().then(function() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    dispatch(logout());
+  }).catch(function(error) {
+    console.log(error);
+  });
 }
 
   return(
     <div className="main">
       <Router>
-        <Sidenav gitLogin = {() => loginWithGithub()}/>
+        <Sidenav gitLogin = {() => loginWithGithub()} logout = {() => doSignOut()}/>
         <div id="page-container">
           <Switch>
             <Route path="/history">

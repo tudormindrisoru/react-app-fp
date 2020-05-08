@@ -48,7 +48,7 @@ class PlayerCard extends React.Component {
       const data = await fetchUserData(username);
       if(data["login"] === undefined) {
         this.setState({
-          cardState: "error",
+          cardState: "error-unknown-player",
           username: this.state.username,
           avatar: this.state.avatar,
           urlLink: this.state.urlLink,
@@ -134,7 +134,7 @@ class PlayerCard extends React.Component {
             <button className="clear-button" onClick={this.clear}>Clear</button>
         </div>
       );
-    } else if(this.state.cardState === "error") {
+    } else if(this.state.cardState === "error-unknown-player") {
       return(
         <div className="player-error-card">
             <p className="error-title">This player doesn`t exist!</p>

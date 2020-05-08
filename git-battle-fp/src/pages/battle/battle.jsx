@@ -14,18 +14,31 @@ function BattlePage() {
 
   const [battleType, setBattleType] = useState('player-vs-player');
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
   const switchBattleType = (type) => {
     dispatch(removePlayers());
     setBattleType(type);
   }
 
-  function mapData() {
+  function mapCards() {
     if(battleType === 'player-vs-player') {
       return (<PlayerVersusPlayer/>);
     } else if(battleType === 'me-vs-player') {
         return (<MeVersusPlayer/>);
       }
+  }
+
+  function displayFightButton() {
+    if(battleType === "player-vs-player") {
+      return(
+        <FightButton type={(battle.firstPlayer !=null && battle.secondPlayer !=null) ? 'active' : 'inactive'}></FightButton>
+      );
+    } else if(battleType === "me-vs-player") {
+      return (
+        <FightButton type={(user.gitData.username !=null && battle.secondPlayer !=null) ? 'active' : 'inactive'}></FightButton>
+      );
+    }
   }
 
 
@@ -34,8 +47,8 @@ function BattlePage() {
     return (
       <div className="battle-page">
         <BattleSwitcher switchBattleType={(type) => switchBattleType(type)}></BattleSwitcher>
-          {mapData()}
-        <FightButton type={(battle.firstPlayer !=null && battle.secondPlayer !=null) ? 'active' : 'inactive'}></FightButton>
+          {mapCards()}
+        {displayFightButton()}
       </div>
     );
 }

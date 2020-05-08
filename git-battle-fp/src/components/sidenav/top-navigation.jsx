@@ -27,7 +27,7 @@ export default function TopNavigation(props) {
             <img src={user.gitData.avatarLink} alt="" className="login-image"/>
             <span className={props.classList[3]}>{user.gitData.username}</span>
           </div>
-          <div className="navigation-item" id="logout-container">
+          <div className="navigation-item" id="logout-container" onClick={() => props.logout()}>
             <FontAwesomeIcon icon={faSignOutAlt} size="2x" className="font-icon" color="#fff"/>
             <span className={props.classList[3]}>Logout</span>
           </div>

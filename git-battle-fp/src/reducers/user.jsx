@@ -7,7 +7,6 @@ const noUserLogged = {
     urlLink: null,
     following: null,
     followers: null,
-    diamonds: null
   },
   userData: {
     diamonds: null,

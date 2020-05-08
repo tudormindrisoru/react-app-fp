@@ -40,7 +40,8 @@ export default function Sidenav(props) {
         <TopNavigation
           user = { user }
           classList = {classList}
-          gitLogin = {() => props.gitLogin()} 
+          gitLogin = {() => props.gitLogin()}
+          logout = {() => props.logout()} 
         />
         <BottomNavigation 
           user = { user}
