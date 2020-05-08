@@ -112,17 +112,16 @@
     margin: 2rem;
     display:flex;
     flex-direction: column;
-    border: .05rem $primary-color solid;
+    border: .08rem $primary-color outset;
     box-shadow: $box-shadow;
     background: #24292e04;
 } 
 
 .image-wrap {
     width: 100%;
-    height: auto;
+    height: 100%;
     position: relative;
     transition: .5s;
-    box-shadow: $box-shadow;
     z-index: 2;
     .image-description {
         position: absolute;
@@ -134,6 +133,11 @@
         visibility: hidden; 
 
     }
+
+    // .profile-image {
+    //     border-bottom: .1rem $primary-color outset;
+
+    // }
     &:hover {
         .image-description {
             visibility: visible;
@@ -190,7 +194,7 @@
     cursor: pointer;
 
     &:hover {
-        border: 0.05rem  #fff solid; 
+        border: 0.05rem  $primary-color solid; 
         background-color: $secondary-color;
         color: #fff;
     }

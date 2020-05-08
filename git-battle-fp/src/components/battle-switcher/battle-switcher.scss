@@ -4,6 +4,7 @@
 .switcher-container {
     width: 100%;
     height: auto;
+
 }
 .battle-switcher {
     width: 20rem;
@@ -32,6 +33,7 @@
     flex: 1;
     border-bottom-right-radius: 1rem;
     border-top-right-radius: 1rem;
+    position: relative;
 }
 
 .player-vs-player-button, .me-vs-player-button {
@@ -53,4 +55,10 @@
     text-align: center;
     color: $secondary-color;
     font-weight: 400;
+}
+
+.lock-icon {
+    position: absolute;
+    right: 10px;
+    top: 7px;
 }

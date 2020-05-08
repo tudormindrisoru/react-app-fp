@@ -39,11 +39,6 @@ const createToken = async (code) =>{
 
   const [user, setuser] = useState(null);
 
-  const onSuccessGithub = (response) => {
-    console.log(response);
-    createToken(response.code);
-  } 
-
   const serverValue = firebase.database.ServerValue;
   const emailAuthProvider = firebase.auth.EmailAuthProvider;
   const auth = firebase.auth();
@@ -55,11 +50,10 @@ const createToken = async (code) =>{
   githubProvider.addScope('user');
   githubProvider.addScope('repo');
 
-  const doSignInWithGithub = async() => {
+  const doSignInWithGithub = async () => {
 
     await auth.signInWithPopup(githubProvider).then(function(result) {
-      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-      console.log(result.additionalUserInfo);
+      console.log(result);
       const userData = {
         username: result.additionalUserInfo.username,
         type: result.additionalUserInfo.profile.type,
@@ -71,16 +65,8 @@ const createToken = async (code) =>{
       }
       setuser(userData);
       dispatch(login(userData));
-      // ...
     }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
+      console.log(error);
     });;
   }
 

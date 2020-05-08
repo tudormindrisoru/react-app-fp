@@ -36,6 +36,7 @@
 .top-navigation {
     display:flex;
     flex-direction: column;
+    padding-top: 0.5rem;
 
 }
 
@@ -45,6 +46,7 @@
     height: auto;
     border-radius: 1rem;
     align-self: center;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
 
@@ -66,6 +68,10 @@
     font-weight: 500;
 
 }
+.top-container {
+   width: 100%;
+   justify-content: center;
+}
 
 
 .bottom-navigation {
@@ -77,14 +83,19 @@
     height: 100%;
     display:flex;
     justify-content: center;
+    position: relative;
     &:hover {
         background: #24292e;
     }
 
     .login-image {
         width: 2.5rem;
-        height: auto;
+        height: 2.5rem;
     }
+}
+.item-extended {
+    justify-content: flex-start;
+    padding-left: 1rem;
 }
 
 .active-item {
@@ -121,14 +132,21 @@
     }
 }
 
-#login-container {
+#login-container, #logout-container, #user-container {
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
 
-
-
 .font-icon {
     align-self: center;
     margin: 0.5rem 0rem;
+}
+
+.lock-icon {
+    position: absolute;
+    margin-right: -20px;
+    top: 8px;
+    background: $secondary-color;
+    border: 5px $secondary-color solid;
+    border-radius: 25px;
 }
