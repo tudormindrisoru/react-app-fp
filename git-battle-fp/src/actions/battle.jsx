@@ -23,3 +23,9 @@ export const removeSecondPlayer = () => {
     type: 'REMOVE_SECOND_PLAYER',
   };
 }
+
+export const removePlayers = () => {
+  return {
+    type: 'REMOVE_PLAYERS'
+  };
+}
