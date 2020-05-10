@@ -4,21 +4,22 @@ import {
   faUser, 
   faUserShield
 } from '@fortawesome/fontawesome-free-solid';
+import axios from 'axios';
 
 import './player-card.scss';
 
 
 const url = `https://api.github.com/users`;
-const fetchUserData = async (username) =>{
-  return fetch(`${url}/${username}`,).then(response => {
-      if(response.ok) {
-          console.log("RESPONSE OK!");
-          return response.json();
-      } else {
-          throw new Error(response);
-      }
+const fetchPlayerData = async (username) =>{
+  console.log(username);
+  const token = localStorage.getItem('access_token');
+  const header = token !== null ? { 'Authorization': `token ${token}`} : {};
+  return await axios.get(`${url}/${username}`, {
+    headers: header
+  }).then(response => {
+    return response.data;
   })
-  .catch( err => {
+  .catch(err => {
       console.log(err);
       return err;
   });
@@ -39,20 +40,20 @@ class PlayerCard extends React.Component {
     this.renderCard = this.renderCard.bind(this);
     this.getUser = this.getUser.bind(this);
     this.openProfile = this.openProfile.bind(this);
-    this.clear = this.clear.bind(this);
+    this.retry = this.retry.bind(this);
   }
 
 
   getUser = async () => {
-    const username = document.querySelector('.card-input').value;
-      const data = await fetchUserData(username);
+      const data = await fetchPlayerData(this.state.username);
       if(data["login"] === undefined) {
         this.setState({
-          cardState: "error-unknown-player",
+          cardState: "error",
           username: this.state.username,
-          avatar: this.state.avatar,
-          urlLink: this.state.urlLink,
-          type: this.state.type,
+          avatar: "",
+          urlLink: "",
+          type: "",
+          errorMessage: data['message']
         });
       } else {
         this.setState({
@@ -81,23 +82,24 @@ class PlayerCard extends React.Component {
   retry = () => {
     this.setState({
       cardState: "blank",
-      username: this.state.username,
-      avatar: this.state.avatar,
-      urlLink: this.state.urlLink,
-      type: this.state.type,
-    })
-  }
-
-  clear = () => {
-    this.setState({
-      cardState: "blank",
       username: "",
       avatar: "",
       urlLink: "",
       type: "",
-    });
-
+      inputValue: ""
+    })
     this.props.clearPlayer();
+  }
+
+  onChangeInput = (e) => {
+    console.log(e.target.value);
+    this.setState({
+      cardState: this.state.cardState,
+      username: e.target.value,
+      avatar: this.state.username,
+      urlLink: this.state.urlLink,
+      type: this.state.type,
+    });
   }
  
   renderCard = () => {
@@ -107,7 +109,12 @@ class PlayerCard extends React.Component {
           <p className="select-player-title">Select player</p>
           <div className="input-container-blank-card">
             <label htmlFor="user-input">Username</label>
-            <input type="text" className="card-input" name="user-input"/>
+            <input type="text" 
+              className="card-input" 
+              name="user-input" 
+              value = {this.state.username}
+              onChange = {(e) => this.onChangeInput(e)}
+            />
           </div>
           <button className="submit-search-button" onClick= {this.getUser} >Search</button>
         </div>
@@ -131,13 +138,13 @@ class PlayerCard extends React.Component {
                 <span>{this.state.type}</span>
               </div>
             </div>
-            <button className="clear-button" onClick={this.clear}>Clear</button>
+            <button className="clear-button" onClick={this.retry}>Clear</button>
         </div>
       );
-    } else if(this.state.cardState === "error-unknown-player") {
+    } else if(this.state.cardState === "error") {
       return(
         <div className="player-error-card">
-            <p className="error-title">This player doesn`t exist!</p>
+            <p className="error-title">{this.state.errorMessage}</p>
             <button className="retry-button" onClick= {this.retry}>Retry</button>
         </div>
       );

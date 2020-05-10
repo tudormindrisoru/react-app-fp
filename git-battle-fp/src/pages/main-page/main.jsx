@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import * as firebase from 'firebase';
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch } from 'react-redux'; 
 import axios from 'axios';
-import { addUser, login, logout } from '../../actions/user';
+import { addUser, login, logout, getHistoryEvents, incrementDiamonds } from '../../actions/user';
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,12 +22,9 @@ import WelcomePage from '../welcome-page/welcome';
 
 export default function Main() {
 
-  // const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("useEffect");
-    console.log(localStorage.getItem('access_token'));
     if(localStorage.getItem('access_token') !== null) {
       let token = localStorage.getItem('access_token');
       axios.get(`https://api.github.com/user`, {
@@ -53,7 +50,6 @@ export default function Main() {
 
   const loginWithGithub = async () => {
       await doSignInWithGithub();
-      console.log("UPDATE DONE");
     }
 
 
@@ -95,7 +91,7 @@ const getDataFromFirebase = (gitData) => {
         history: null
       });
       dispatch(login({history: null, diamonds: 0}));
-  }
+    }
     dispatch(login({history: firebaseData.history == null ? null : firebaseData.history , diamonds: firebaseData.diamonds}));
     });
 }
@@ -110,6 +106,27 @@ const doSignOut = () => {
   });
 }
 
+const addBattleToHistory = async (firstPlayer, secondPlayer, currentDiamondsValue) => {
+  const data = {
+    myScore: firstPlayer.score,
+    opponent: secondPlayer
+  }
+  await firebase.database().ref('users/'+ firstPlayer.playerData.username + '/history').push(data);
+  await firebase.database().ref('users/'+ firstPlayer.playerData.username+ '/history').once('value').then(function(snapshot) {
+    let firebaseData = snapshot.val(); 
+    console.log(firebaseData);
+    dispatch(getHistoryEvents(firebaseData));
+        
+    if(firstPlayer.score > secondPlayer.score) {
+      console.log(currentDiamondsValue);
+      dispatch(incrementDiamonds());
+      const incrementedNumber = currentDiamondsValue + 1;
+      const updatedData = {};
+      updatedData['diamonds'] = incrementedNumber;
+      firebase.database().ref('/users/').child(firstPlayer.playerData.username).update(updatedData);
+    }
+  });
+}
   return(
     <div className="main">
       <Router>
@@ -120,11 +137,11 @@ const doSignOut = () => {
               <HistoryPage />
             </Route>
             <Route path="/battle">
-              <BattlePage />
+              <BattlePage addBattleToHistory = {(firstPlayer,secondPlayer, currentDiamondsValue) => addBattleToHistory(firstPlayer,secondPlayer,currentDiamondsValue)}/>
             </Route>
-            <Route path="/statistics">
+            {/* <Route path="/statistics">
               <StatisticsPage />
-            </Route>
+            </Route> */}
             <Route exact path="/">
               <WelcomePage/>
             </Route>

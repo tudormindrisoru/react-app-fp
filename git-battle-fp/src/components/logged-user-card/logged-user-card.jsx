@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -8,10 +8,10 @@ import {
 
 import { useSelector } from 'react-redux';
 
-export default function LoggedUserCard() {
+export default function LoggedUserCard(props) {
 
-  const user = useSelector(state => state.user);
-  console.log(user);
+  // const user = useSelector(state => state.user);
+  const [user] = useState(props.user);
   return(
     <div className="player-chosen-card">
       <a href={user.gitData.urlLink} target="_blank" rel="noopener noreferrer">

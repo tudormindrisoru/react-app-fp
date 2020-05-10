@@ -18,9 +18,15 @@ export const logout = () => {
   };
 }
 
-export const modifyDiamonds = (number) => {
+export const incrementDiamonds = () => {
   return {
-    type: 'MODIFY_DIAMONDS',
-    payload: number
+    type: 'INCREMENT_DIAMONDS',
+  };
+}
+
+export const getHistoryEvents = (historyEvents) => {
+  return {
+    type: 'GET_HISTORY_EVENTS',
+    payload: historyEvents,
   };
 }

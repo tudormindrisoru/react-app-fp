@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { selectFirstPlayer, selectSecondPlayer, removeFirstPlayer, removeSecondPlayer } from '../../actions/battle';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSecondPlayer, removeSecondPlayer } from '../../actions/battle';
 
 import './me-versus-player.scss';
 
@@ -11,31 +11,22 @@ import versus from '../../assets/versus-v2.png';
 
 function MeVersusPlayer() {
 
-  // const battle = useSelector( state => state.battle);
+  const selectUser = useSelector(state => state.user);
+
   const dispatch = useDispatch();
 
 
-  // const [firstPlayer,setFirstPlayer] = useState(battle.firstPlayer);
-  // const [secondPlayer,setSecondPlayer] = useState(battle.secondPlayer);
-
-
   const getSecondPlayer = (player) => {
-    // setSecondPlayer(player);
+
     dispatch(selectSecondPlayer(player));
   }
 
-
   const clearSecondPlayer = () => {
     dispatch(removeSecondPlayer());
-    // setSecondPlayer(null);
   }
     return (
       <div className="card-section">
-          {/* <PlayerCard 
-            getPlayer = {(player) => getFirstPlayer(player)} 
-            clearPlayer = {() => clearFirstPlayer()}
-          /> */}
-          <LoggedUserCard/>
+          <LoggedUserCard user = {selectUser}/>
           <img src={versus} alt="" className="versus-image"/>
           <PlayerCard 
             getPlayer = {(player) => getSecondPlayer(player)}

@@ -16,11 +16,19 @@
   align-items: center;
   display:flex;
   cursor: pointer;
+  transition: 0.5s;
 
-    #fight-image{
+    #fight-icon{
       width: 3.5rem;
       height: 3.5rem;
       pointer-events: none;
+      background-image: url("../../assets/versus-swords.png");
+      background-size: cover;
+    }
+    &:hover #fight-icon {
+      background-image: url("../../assets/versus-swords-hover.png");
+      background-size: cover;
+
     }
 
     span {
@@ -28,14 +36,34 @@
       color: $secondary-color;
       font-size: 2rem;
       margin: 0 auto;
+      pointer-events: none;
     }
+
+    &:hover {
+      background: #2d3946;
+    }
+
+    &:hover span {
+      color: #fff;
+    }
+}
+
+.battle-fought{ 
+  width: 15rem;
+  height: 5rem;
+  outline: none;
+  border: .05rem $primary-color solid;
+  background: transparent;
+  align-items: center;
+  display:flex;
+  cursor: pointer;
 }
 
 
 
   @media only screen and (max-width: 1000px) {
 
-    .fight-button {
+    .fight-button, .battle-fought {
       margin-top: 2rem;
       margin-bottom: 2rem;
     }

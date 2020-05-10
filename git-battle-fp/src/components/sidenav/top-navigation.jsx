@@ -18,19 +18,20 @@ export default function TopNavigation(props) {
 
   const user = useSelector(state => state.user);
   const displayLoginContainer = () => {
- 
-    console.log(user);
     if(user.isLogged) {
+      
       return(
         <div className="top-container">
           <div className="navigation-item" id="user-container">
             <img src={user.gitData.avatarLink} alt="" className="login-image"/>
             <span className={props.classList[3]}>{user.gitData.username}</span>
           </div>
-          <div className="navigation-item" id="logout-container" onClick={() => props.logout()}>
-            <FontAwesomeIcon icon={faSignOutAlt} size="2x" className="font-icon" color="#fff"/>
-            <span className={props.classList[3]}>Logout</span>
-          </div>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <div className="navigation-item" id="logout-container" onClick={() => props.logout()}>
+              <FontAwesomeIcon icon={faSignOutAlt} size="2x" className="font-icon" color="#fff"/>
+              <span className={props.classList[3]}>Logout</span>
+            </div>
+          </Link>
           <div className= {props.classList[2]}>
           <FontAwesomeIcon icon={faGem} size="sm" className="font-icon" color="#fff"/>
           <span id="number-of-diamonds">{user.userData.diamonds}</span>

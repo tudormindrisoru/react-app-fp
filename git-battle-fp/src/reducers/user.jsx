@@ -32,13 +32,24 @@ const userReducer = (state = noUserLogged,action) => {
     case 'LOGOUT_USER':
       return noUserLogged;
   
-    case 'MODIFY_DIAMONDS':
+    case 'INCREMENT_DIAMONDS':
       return {
         isLogged: state.isLogged,
         gitData: state.gitData,
         userData: {
           history: state.userData.history,
-          diamonds: action.payload
+          diamonds: state.userData.diamonds + 1
+        }
+      }
+    case 'ADD_HISTORY_EVENT':
+      const newHistoryEvent = action.payload;
+      return {
+        isLogged: state.isLogged,
+        gitData: state.gitData,
+        userData: {
+          history: state.userData.history !== null ? [...state.userData.history, newHistoryEvent]
+           : newHistoryEvent,
+          diamonds: state.userData.diamonds
         }
       }
     default:

@@ -10,7 +10,7 @@ import TopNavigation from './top-navigation';
 export default function Sidenav(props) {
 
   const [extended, setextended] = useState(false);
-  const [activePage,setactivePage] = useState("main");
+  // const [activePage,setactivePage] = useState("main");
   const [classList, setclassList] = useState(['sidenav-container', 'font-icon', 'diamonds-container', 'navigation-labels label-hidden']);
   
   const user = useSelector(state => state.user);
@@ -28,10 +28,12 @@ export default function Sidenav(props) {
   }
 
   const changeActivePage = (e) => {
+
+    console.log(e);
     if(extended === true) {
       extend();
     }
-    setactivePage(e.target.value);
+    // setactivePage(e.target.value);
   }
   
   return (
