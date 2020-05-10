@@ -137,7 +137,7 @@ function BattlePage(props) {
 
   const calculateScore = (playerSubscription, player) => {
     let repoSizeSum = 0;
-    const numberOfRepos = playerSubscription.length;
+    const numberOfRepos = (playerSubscription !== undefined ? playerSubscription.length : 0);
     playerSubscription.forEach((item) => {
       repoSizeSum += item.size;
     })

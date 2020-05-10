@@ -8,12 +8,6 @@ import { useSelector } from 'react-redux';
 function BattleSwitcher(props) {
 
   const user = useSelector(state => state.user);
-  // useEffect(() => {
-  //   if(user.isLogged === true){
-
-  //   }
-  // });
-
 
   const switchButton = (type) => {
     if (type === "player-vs-player") {

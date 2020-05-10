@@ -8,7 +8,11 @@ export default function WelcomePage() {
     return(
       <div className="welcome-page"> 
         <div className="message-container">
-          <p className="message">Welcome, {user.gitData.username !== null ?  <span id="welcome-user">{user.gitData.username}</span> : "fighter"} !</p>
+          <p className="message">Welcome, 
+            {user.gitData.username !== null ? 
+              <span id="welcome-user">{user.gitData.username}</span> 
+            : "fighter"}!
+          </p>
         </div>
       <img src= {BackgroundImage} alt="" id="welcome-background"/>
       {/* <div className ></div> */}

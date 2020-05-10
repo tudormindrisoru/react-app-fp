@@ -7,6 +7,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 
 import './main.scss';
@@ -129,10 +130,10 @@ const addBattleToHistory = async (firstPlayer, secondPlayer, currentDiamondsValu
         <Sidenav gitLogin = {() => loginWithGithub()} logout = {() => doSignOut()}/>
         <div id="page-container">
           <Switch>
-            <Route path="/history">
+            <Route exact path="/history">
               <HistoryPage />
             </Route>
-            <Route path="/battle">
+            <Route exact path="/battle">
               <BattlePage addBattleToHistory = {(firstPlayer,secondPlayer, currentDiamondsValue) => addBattleToHistory(firstPlayer,secondPlayer,currentDiamondsValue)}/>
             </Route>
             {/* <Route path="/statistics">
@@ -141,6 +142,7 @@ const addBattleToHistory = async (firstPlayer, secondPlayer, currentDiamondsValu
             <Route exact path="/">
               <WelcomePage/>
             </Route>
+            <Redirect from='*' to='/' />
           </Switch>
         </div>
       </Router>
