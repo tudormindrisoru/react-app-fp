@@ -2,9 +2,9 @@
 
 .input-field {
   position: relative;
-  width: 250px;
-  height: 44px;
-  line-height: 44px;
+  width: 6rem;
+  height: 2rem;
+  line-height: .5rem;
   display: inline-block;
 }
 label {
@@ -12,7 +12,7 @@ label {
   text-align: start;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 6rem;
   color: #d3d3d3;
   transition: 0.2s all;
   cursor: text;

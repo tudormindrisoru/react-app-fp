@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faUser, 
   faUserShield
 } from '@fortawesome/fontawesome-free-solid';
-
-import { useSelector } from 'react-redux';
 
 export default function LoggedUserCard(props) {
 

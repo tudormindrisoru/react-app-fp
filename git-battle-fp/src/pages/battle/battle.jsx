@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -9,42 +10,72 @@ import BattleSwitcher from '../../components/battle-switcher/battle-switcher';
 import PlayerVersusPlayer from '../../components/player-versus-player/player-versus-player';
 import MeVersusPlayer from '../../components/me-versus-player/me-versus-player';
 import FightButton from '../../components/fight-button/fight-button';
+import RefreshButton from '../../components/refresh-button/refresh-button';
+import ResultTable from '../../components/result-table/result-table';
 
 
 function BattlePage(props) {
   const [battleType, setBattleType] = useState('player-vs-player');
-  const [battleFought,setBattleFoght] = useState(false);
+  const [battleInfo, setBattleInfo] = useState(null);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const battle = useSelector(state => state.battle);
 
+  useEffect(() => {
+    return () => {
+      dispatch(removePlayers());
+    }
+  }, [dispatch]);
+
+ 
   const switchBattleType = (type) => {
     dispatch(removePlayers());
     if(type === "me-vs-player") {
       dispatch(selectFirstPlayer(user.gitData));
     }
     setBattleType(type);
+    onRefresh();
+  }
+
+  const resetCards = () => {
+    dispatch(removePlayers());
   }
 
   function mapCards() {
     switch(battleType) {
       case "player-vs-player":
-        return (<PlayerVersusPlayer/>);
+        return (
+        <PlayerVersusPlayer 
+          resetCards = {() => resetCards()} 
+        />);
       case "me-vs-player": 
-        return (<MeVersusPlayer/>);
+        return (
+        <MeVersusPlayer 
+          resetCards = {() => resetCards()}
+          />);
       default: 
         break;
     }
   }
 
+
   function displayFightButton() {
+    if(battleInfo !== null) {
+      console.log(battleInfo[0]);
+      return(
+        <div className="info-after-fight">
+          <RefreshButton onClick= {() => onRefresh()}/>
+          <ResultTable battleInfo = {battleInfo} type = {battleType} user = {user}/>
+        </div>
+      )
+    }
+
     switch(battleType) { 
       case "player-vs-player":
         return(
           <FightButton 
             type={(battle.firstPlayer !=null && battle.secondPlayer !=null) ? 'active' : 'inactive'}
             fight = { () => fight() }
-            battleFought = {battleFought}
           />
         );
       case "me-vs-player":
@@ -52,13 +83,17 @@ function BattlePage(props) {
           <FightButton 
           type={(user.gitData.username !=null && battle.secondPlayer !=null) ? 'active' : 'inactive'}
           fight = { () => fight() }
-          battleFought = {battleFought}
           />
         );
       default: 
           break;
     }
   }
+
+  const onRefresh = () => {
+    setBattleInfo(null);
+  }
+
   const getUserSubscription = async (username,url) => {
     const token = localStorage.getItem('access_token');
     const header = token !== null ? { 'Authorization': `token ${token}`} : {};
@@ -72,12 +107,12 @@ function BattlePage(props) {
   }
 
   const fight = async () => {
-    setBattleFoght(true);
     console.log('click');
     if(battle.firstPlayer.username !== battle.secondPlayer.username) {
       const usersApiUrl = `https://api.github.com/users`;
       const firstPlayerSubscription = await getUserSubscription(battle.firstPlayer.username, usersApiUrl);
       const secondPlayerSubscription = await getUserSubscription(battle.secondPlayer.username, usersApiUrl);
+      console.log(battle.firstPlayer);
       const firstPlayerBattleInfo = {
         playerData: battle.firstPlayer,
         score: calculateScore(firstPlayerSubscription,battle.firstPlayer)
@@ -86,12 +121,17 @@ function BattlePage(props) {
         playerData: battle.secondPlayer,
         score: calculateScore(secondPlayerSubscription,battle.secondPlayer)
       }
+      setBattleInfo(
+        [
+          firstPlayerBattleInfo,
+          secondPlayerBattleInfo
+        ]
+      );
       if(battleType === "me-vs-player") {
       
         const diamonds = user.userData.diamonds;
         props.addBattleToHistory(firstPlayerBattleInfo, secondPlayerBattleInfo, diamonds);
       }
-      
     }
   }
 

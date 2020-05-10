@@ -1,0 +1,40 @@
+@import '../../pages/main-page/main.scss';
+
+#refresh-button {
+  margin-top: 2rem;
+  width: 15rem;
+  height: 5rem;
+  outline: none;
+  border: .05rem $secondary-color solid;
+  background: transparent;
+  align-items: center;
+  display:flex;
+  cursor: pointer;
+  transition: 0.5s;
+  align-self:center;
+
+    #refresh-icon {
+      transition: 1s;
+    }
+
+    span {
+      font-weight: bold;
+      color: $secondary-color;
+      font-size: 2rem;
+      margin: 0 auto;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background: #2d3946;
+
+      #refresh-icon {
+        color: #fff;
+        transform: rotate(360deg);
+      }
+    }
+
+    &:hover span {
+      color: #fff;
+    }
+}

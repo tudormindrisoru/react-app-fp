@@ -20,6 +20,15 @@
     align-self: center;
 }
 
+
+.info-after-fight {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+
 @media only screen and (max-width: 1000px) {
 
     .battle-page {

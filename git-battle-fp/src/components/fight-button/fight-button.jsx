@@ -13,15 +13,7 @@ class FightButton extends React.Component {
   }
 
   render() {
-    if(this.state.battleFought) {
-      return(
-        <div className="button-container" >
-          <button className="battle-fought">
-            <span>BATTLE FOUGHT</span>
-          </button>
-        </div>
-      );
-    } else if(this.props.type === 'active') {
+    if(this.props.type === 'active') {
       return(
         <div className="button-container" >
           <button 
@@ -39,7 +31,6 @@ class FightButton extends React.Component {
     else {
       return (<div></div>);
     }
-
   }
 }
 

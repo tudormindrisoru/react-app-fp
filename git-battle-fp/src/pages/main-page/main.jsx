@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import { useDispatch } from 'react-redux'; 
 import axios from 'axios';
 import { addUser, login, logout, getHistoryEvents, incrementDiamonds } from '../../actions/user';
@@ -14,7 +14,7 @@ import './main.scss';
 import Sidenav from '../../components/sidenav/sidenav';
 import BattlePage from '../battle/battle';
 import HistoryPage from '../history/history';
-import StatisticsPage from '../statistics/statistics';
+// import StatisticsPage from '../statistics/statistics';
 import WelcomePage from '../welcome-page/welcome';
 
 
@@ -61,7 +61,6 @@ export default function Main() {
     githubProvider.addScope('repo');
 
     await auth.signInWithPopup(githubProvider).then(function(result) {
-      console.log(result);
       const gitData = {
         username: result.additionalUserInfo.username,
         type: result.additionalUserInfo.profile.type,
@@ -73,7 +72,6 @@ export default function Main() {
       localStorage.setItem('access_token', result.credential.accessToken);
       localStorage.setItem('refresh_token', result.user.refreshToken);
       dispatch(addUser(gitData));
-      console.log("aici git login");
       getDataFromFirebase(gitData);
 
   }).catch(function(error) {
@@ -114,11 +112,9 @@ const addBattleToHistory = async (firstPlayer, secondPlayer, currentDiamondsValu
   await firebase.database().ref('users/'+ firstPlayer.playerData.username + '/history').push(data);
   await firebase.database().ref('users/'+ firstPlayer.playerData.username+ '/history').once('value').then(function(snapshot) {
     let firebaseData = snapshot.val(); 
-    console.log(firebaseData);
     dispatch(getHistoryEvents(firebaseData));
         
     if(firstPlayer.score > secondPlayer.score) {
-      console.log(currentDiamondsValue);
       dispatch(incrementDiamonds());
       const incrementedNumber = currentDiamondsValue + 1;
       const updatedData = {};

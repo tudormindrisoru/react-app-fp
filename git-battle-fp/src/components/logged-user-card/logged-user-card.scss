@@ -1,5 +1,6 @@
 .player-chosen-card {
   width: 15rem;
+  height: 431px;
   background: #fff;
   align-self: center;
   display:flex;
@@ -7,6 +8,7 @@
   border: .08rem $primary-color outset;
   box-shadow: $box-shadow;
   background: #24292e04;
+
 } 
 
 .image-wrap {

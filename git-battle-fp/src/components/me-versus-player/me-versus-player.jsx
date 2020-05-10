@@ -24,16 +24,17 @@ function MeVersusPlayer() {
   const clearSecondPlayer = () => {
     dispatch(removeSecondPlayer());
   }
-    return (
-      <div className="card-section">
-          <LoggedUserCard user = {selectUser}/>
-          <img src={versus} alt="" className="versus-image"/>
-          <PlayerCard 
-            getPlayer = {(player) => getSecondPlayer(player)}
-            clearPlayer = {() => clearSecondPlayer()}
-          />
-      </div>
-    );
+
+  return (
+    <div className="card-section">
+        <LoggedUserCard user = {selectUser}/>
+        <img src={versus} alt="" className="versus-image"/>
+        <PlayerCard 
+          getPlayer = {(player) => getSecondPlayer(player)}
+          clearPlayer = {() => clearSecondPlayer()}
+        />
+    </div>
+  );
 }
 
 export default MeVersusPlayer;

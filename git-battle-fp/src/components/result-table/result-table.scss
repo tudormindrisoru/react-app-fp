@@ -1,10 +1,10 @@
 @import '../../pages/main-page/main.scss';
 
-#history-table {
+#result-table {
   border-collapse: collapse;
   width: 80%;
   align-self:center;
-  border: .05rem solid $primary-color;
+  margin: 2rem 0rem;
 }
 
 td, th {
@@ -24,7 +24,7 @@ td:nth-child(1) {
 
   .player-name {
     margin-left: 1rem;
-    align-self:center;
+    align-self: center;
   }
 }
 
@@ -37,4 +37,3 @@ th {
   background-color: $secondary-color;
   color: white;
 }
-

@@ -52,6 +52,7 @@ export default function TopNavigation(props) {
       <Link to="/" style={{ textDecoration: 'none' }}>
         <div className="logo-container">
           <img src={LogoImage} alt="" id="logo"/>
+          <span className={props.classList[3]}> BATTLE</span>
         </div>
       </Link>
       {displayLoginContainer()}

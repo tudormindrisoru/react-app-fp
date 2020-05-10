@@ -107,16 +107,14 @@ class PlayerCard extends React.Component {
       return(
         <div className="player-blank-card">
           <p className="select-player-title">Select player</p>
-          <div className="input-container-blank-card">
-            <label htmlFor="user-input">Username</label>
-            <input type="text" 
-              className="card-input" 
-              name="user-input" 
-              value = {this.state.username}
-              onChange = {(e) => this.onChangeInput(e)}
-            />
+          <div className="input-field">
+            <input type="text" className="username-input" onChange = {(e) => this.onChangeInput(e)} required />
+            <label htmlFor="username-input"> Username</label>
           </div>
-          <button className="submit-search-button" onClick= {this.getUser} >Search</button>
+          <div className="submit-button-container">
+            <button className="submit-search-button" onClick= {this.state.username !=="" ? this.getUser : {}} >Search</button>
+          </div>
+
         </div>
       );
     } else if(this.state.cardState === "chosen") {
