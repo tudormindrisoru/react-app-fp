@@ -90,8 +90,12 @@ const getDataFromFirebase = (gitData) => {
         history: null
       });
       dispatch(login({history: null, diamonds: 0}));
+  
+    } else {
+      dispatch(login({history: (firebaseData.history === null || firebaseData.history === undefined)  ? null : firebaseData.history , diamonds: firebaseData.diamonds}));
     }
-    dispatch(login({history: firebaseData.history == null ? null : firebaseData.history , diamonds: firebaseData.diamonds}));
+    
+    
     });
 }
 
