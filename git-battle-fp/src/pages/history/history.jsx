@@ -29,7 +29,7 @@ function HistoryPage () {
         )
       }
       else {
-        return(<p>You don`t have an history!</p>);
+        return(<p>You don`t have a history yet!</p>);
       }
     }
   }
